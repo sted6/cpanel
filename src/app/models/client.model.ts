@@ -4,13 +4,13 @@ import { AccountEvent } from './account-event';
 export interface Client {
     firstName: string,
     lastName: string,
-    phoneNumber: string,
+    phoneNumber: any,
     email: string,
     balance?: number,
     address?: Address,
     id?: string;
     accountRep?: string,
     accountEvents: AccountEvent[],
-    socialSecurity?: string,
+    socialSecurity?: any,
     birthday?: Date
 }
