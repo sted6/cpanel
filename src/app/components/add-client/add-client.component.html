@@ -142,7 +142,7 @@
         [(ngModel)]="client.socialSecurity"
         minlength="9"
         maxlength="9"
-        pattern="/[0-9]+/"
+        pattern="[0-9]+"
         >
         <div [hidden]="!socialSecurity.errors?.minlength && !socialSecurity.errors?.maxlength && !socialSecurity.errors?.pattern" class="invalid-feedback">
           Must be exactly 9 numeric characters.
