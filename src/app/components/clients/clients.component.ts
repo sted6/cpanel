@@ -13,7 +13,7 @@ import { Client } from 'src/app/models/client.model';
 export class ClientsComponent implements OnInit {
   clients: Client[];
   totalBalance: number;
-  modalOpen = false;
+  modalOpen: boolean = false;
   userIsAdmin: boolean = false;
 
   constructor(private clientService: ClientService) { }
@@ -36,7 +36,14 @@ export class ClientsComponent implements OnInit {
   }
 
   deleteClient(client: Client) {
+    if(this.userIsAdmin)
     this.clientService.deleteClient(client);
+    else
+    this.notAuthorized();
+  }
+
+  notAuthorized(){
+    alert("You don't have access to do that!")
   }
 
 }

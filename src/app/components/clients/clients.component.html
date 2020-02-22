@@ -24,7 +24,7 @@
         <td>{{ client.balance | currency}}</td>
         <td>{{ client.accountRep }}</td>
         <td><a routerLink="/client/{{ client.id }}"class="badge badge-primary">Details <span class="sr-only">(current)</span></a></td>
-        <td><button [disabled]="!userIsAdmin" type="button" class="close" aria-label="Close" (click)="deleteClient(client)">
+        <td><button type="button" class="close" aria-label="Close" (click)="deleteClient(client)">
           <span aria-hidden="true">&times;</span>
       </button></td>
       </tr>
