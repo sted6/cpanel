@@ -1,0 +1,175 @@
+<button type="button" class="btn btn-success mb-2 float-right" (click)="openModal(template)">Edit Client</button>
+ 
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add Client</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #clientForm="ngForm" (ngSubmit)="onSubmit(clientForm)">
+
+      <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input
+          type="text"
+          class="form-control"
+          name="firstName"
+          #clientFirstName="ngModel"
+          [ngClass] ="{'is-invalid':clientFirstName.errors && clientFirstName.touched}"
+          [(ngModel)]="client.firstName"
+          minlength="2"
+          required
+          >
+          <div [hidden]="!clientFirstName.errors?.required" class="invalid-feedback">
+              First name required
+          </div>
+          <div [hidden]="!clientFirstName.errors?.minlength" class="invalid-feedback">
+              Must be at least two (2) characters
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input
+          type="text"
+          class="form-control"
+          name="lastName"
+          #clientLastName="ngModel"
+          [ngClass] ="{'is-invalid':clientLastName.errors && clientLastName.touched}"
+          [(ngModel)]="client.lastName"
+          minlength="2"
+          required
+          >
+          <div [hidden]="!clientLastName.errors?.required" class="invalid-feedback">
+              Last name required
+          </div>
+          <div [hidden]="!clientLastName.errors?.minlength" class="invalid-feedback">
+              Must be at least two (2) characters
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="email">Email</label>
+          <input
+          type="text"
+          class="form-control"
+          name="email"
+          #clientEmail="ngModel"
+          [ngClass] ="{'is-invalid':clientEmail.errors && clientEmail.touched}"
+          [(ngModel)]="client.email"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+          required
+          >
+          <div [hidden]="!clientEmail.errors?.required && clientEmail.touched" class="invalid-feedback">
+              Email required
+          </div>
+          <div [hidden]="!clientEmail.errors?.pattern" class="invalid-feedback">
+              Please use a valid email.
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input
+          type="text"
+          class="form-control"
+          name="phoneNumber"
+          #clientPhone="ngModel"
+          [ngClass] ="{'is-invalid':clientPhone.errors && clientPhone.touched}"
+          [(ngModel)]="client.phoneNumber"
+          minlength="10"
+          required
+          >
+          <div [hidden]="!clientPhone.errors?.required" class="invalid-feedback">
+              Phone number required
+          </div>
+          <div [hidden]="!clientPhone.errors?.pattern" class="invalid-feedback">
+              Please use a valid 10-digit phone number.
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="street">Street Address</label>
+        <input
+        type="text"
+        class="form-control"
+        name="street"
+        #street="ngModel"
+        [(ngModel)]="client.address.street"
+        >
+      </div>
+      <div class="form-group">
+        <label for="city">City</label>
+        <input
+        type="text"
+        class="form-control"
+        name="city"
+        #city="ngModel"
+        [(ngModel)]="client.address.city"
+        >
+      </div>
+      <div class="form-group">
+        <label for="state">State</label>
+        <input
+        type="text"
+        class="form-control"
+        name="state"
+        #state="ngModel"
+        [(ngModel)]="client.address.state"
+        >
+      </div>
+      <div class="form-group">
+        <label for="zip">Zip Code</label>
+        <input
+        type="text"
+        class="form-control"
+        name="zip"
+        #client.address.zip="ngModel"
+        [(ngModel)]="client.address.zip"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="socialSecurity">Social Security</label>
+        <input
+        type="text"
+        class="form-control"
+        name="socialSecurity"
+        #socialSecurity="ngModel"
+        [(ngModel)]="client.socialSecurity"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="birthday">Birthday</label>
+        <input
+        type="date"
+        class="form-control"
+        name="birthday"
+        #birthday="ngModel"
+        [(ngModel)]="client.birthday"
+        >
+      </div>
+
+      <div class="form-group">
+          <label for="accountRep">Account Rep</label>
+          <input
+          type="text"
+          class="form-control"
+          name="accountRep"
+          #accountRep="ngModel"
+          [(ngModel)]="client.accountRep"
+          >
+      </div>
+
+      <input type="submit" value="Submit" class="btn btn-primary btn-block"/>
+  </form>
+  </div>
+</ng-template>
+
+
+
+
+
+      

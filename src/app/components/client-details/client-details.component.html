@@ -1,0 +1,78 @@
+<ng-container *ngIf="client; else noClient">
+
+    <h2 class="float-left">{{ client.firstName }} {{ client.lastName }} - {{ client.id }}</h2>
+    <app-edit-client></app-edit-client>
+<div class="table-responsive">
+    <table class="table table-sm table-striped table-hover">
+        <tbody>
+            <tr *ngIf="client.socialSecurity">
+                <th>Social Security</th>
+                <td>{{ client.socialSecurity | socialSecurity }}</td>
+            </tr>
+            <tr *ngIf="client.birthday">
+                <th>Date of Birth</th>
+                <td>{{ client.birthday }}</td>
+            </tr>
+            <tr>
+                <th>Phone Number</th>
+                <td>{{ client.phoneNumber | phone }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ client.email }}</td>
+            </tr>
+            <ng-container *ngIf="client.address">
+                <tr>
+                    <th>Street</th>
+                    <td>{{ client.address.street }}</td>
+                </tr>
+                <tr>
+                    <th>City</th>
+                    <td>{{ client.address.city }}</td>
+                </tr>
+                <tr>
+                    <th>State</th>
+                    <td>{{ client.address.state }}</td>
+                </tr>
+                <tr>
+                    <th>Zip</th>
+                    <td>{{ client.address.zip }}</td>
+                </tr>
+            </ng-container>
+            <tr>
+                <th>Balance</th>
+                <td>{{ client.balance | currency }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 class="float-left">Deposit and Withdrawal History</h3>
+    <app-new-account-event></app-new-account-event>
+    <table id="history" class="table table-sm table-hover">
+        <thead>
+            <tr>
+            <th scope="col">Event</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let event of accountEvents">
+            <td> {{ event.type }}</td>
+            <td>{{ event.amount | currency }}</td>
+            <td>{{ event.date.toDate() }}
+            <button type="button" class="close pull-right" aria-label="Close" (click)="removeEvent(event,client)">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</ng-container>
+
+<ng-template #noClient>
+    <hr>
+    <h5>No such user found.</h5>
+</ng-template>
+

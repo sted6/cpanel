@@ -1,0 +1,38 @@
+<app-add-client></app-add-client>
+<div class="table-responsive">
+<table *ngIf="clients?.length > 0;else noClients" class="table table-sm table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Client ID</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Email Address</th>
+        <th scope="col">Balance</th>
+        <th scope="col">Account Manager</th>
+        <th scope="col">View Details</th>
+        <th scope="col">Delete Client</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients">
+        <th scope="row">{{ client.id }}</th>
+        <td>{{ client.firstName}}</td>
+        <td>{{ client.lastName }}</td>
+        <td>{{ client.phoneNumber | phone }}</td>
+        <td>{{ client.email }}</td>
+        <td>{{ client.balance | currency}}</td>
+        <td>{{ client.accountRep }}</td>
+        <td><a routerLink="/client/{{ client.id }}"class="badge badge-primary">Details <span class="sr-only">(current)</span></a></td>
+        <td><button [disabled]="!userIsAdmin" type="button" class="close" aria-label="Close" (click)="deleteClient(client)">
+          <span aria-hidden="true">&times;</span>
+      </button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  <ng-template #noClients>
+    <hr>
+    <h5>There are no clients in the system.</h5>
+</ng-template>

@@ -1,0 +1,12 @@
+#history {
+    tr {
+        .close {
+            display: none;
+        }
+        &:hover {
+            .close {
+                display: inline-block;
+            }
+        }
+    }
+}

@@ -1,0 +1,51 @@
+<button type="button" class="btn btn-success mb-2 float-right" (click)="openModal(template)">Add Deposit/Withdrawal</button>
+ 
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add Account Event</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #clientForm="ngForm" (ngSubmit)="onSubmit(clientForm)">
+
+        <div class="form-group">
+            <label for="type">Event Type</label>
+            <select 
+                class="form-control" 
+                id="type"
+                name="type"
+                #type
+                [(ngModel)]="accountEvent.type"
+                >
+              <option>Deposit</option>
+              <option>Withdrawal</option>
+            </select>
+          </div>
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input
+            type="number"
+            class="form-control"
+            name="amount"
+            #amount="ngModel"
+            [ngClass] ="{'is-invalid':amount.errors && amount.touched}"
+            [(ngModel)]="accountEvent.amount"
+            required
+            >
+            <div [hidden]="!amount.errors?.required" class="invalid-feedback">
+                The amount is required.
+            </div>
+        </div>
+
+      <input type="submit" value="Submit" class="btn btn-primary btn-block"/>
+  </form>
+  </div>
+</ng-template>
+
+
+
+
+
+      

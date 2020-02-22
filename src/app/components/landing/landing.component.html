@@ -1,0 +1,12 @@
+<div class="container h80">
+    <div class="row h-100">
+        <div class="col-12 my-auto">
+            <div id="welcome" class="jumbotron text-center">
+                <h1>Welcome to the Very Good Consulting Company Client Panel</h1>
+                <ng-container *ngIf="!isLoggedIn">
+                    <p>Please <a routerLink="/login">Login</a> to Continue</p>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

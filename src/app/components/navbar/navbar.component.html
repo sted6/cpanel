@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"><span class="text-primary">Very Good Consulting Company</span></a>
+    <button 
+        class="navbar-toggler" 
+        type="button" 
+        data-toggle="collapse" 
+        data-target="#navbarSupportedContent" 
+        aria-label="Toggle navigation"
+        (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed" 
+        aria-controls="navbarSupportedContent"
+        >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" [collapse]="isCollapsed" [isAnimated]="true">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a *ngIf="isLoggedIn" class="nav-link" routerLink="/dashboard">Dashboard <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <ng-container *ngIf="currentUser">
+        <ul class="navbar-nav">
+            <li class="navbar-brand pull-right">Welcome, {{currentUser}}</li>
+        </ul>
+      </ng-container>
+      <div *ngIf="!isLoggedIn" class="btn-group btn-group-sm">
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline-primary" routerLink="/login">Login</button>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline-primary" routerLink="/register">Register</button>
+        </div>
+      </div>
+      <button *ngIf="isLoggedIn" type="button" class="btn btn-primary" (click)="logoutOnClick()">Logout</button>
+    </div>
+  </nav>
