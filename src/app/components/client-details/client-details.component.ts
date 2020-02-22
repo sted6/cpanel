@@ -49,6 +49,7 @@ export class ClientDetailsComponent implements OnInit {
     const index = this.client.accountEvents.indexOf(event);
     this.client.accountEvents.splice(index,1);
     this.clientService.updateClient(client);
+    this.flashMessage.show('Account Event Removed', {cssClass: 'alert-success', timeout: 4000});
   }
 
 }
