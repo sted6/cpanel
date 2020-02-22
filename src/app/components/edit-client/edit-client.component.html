@@ -2,7 +2,7 @@
  
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Add Client</h4>
+    <h4 class="modal-title pull-left">Edit Client</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -80,12 +80,13 @@
           [ngClass] ="{'is-invalid':clientPhone.errors && clientPhone.touched}"
           [(ngModel)]="client.phoneNumber"
           minlength="10"
+          maxlength="10"
           required
           >
           <div [hidden]="!clientPhone.errors?.required" class="invalid-feedback">
               Phone number required
           </div>
-          <div [hidden]="!clientPhone.errors?.pattern" class="invalid-feedback">
+          <div [hidden]="!clientPhone.errors?.pattern && !clientPhone.errors?.minlength && !clientPhone.errors?.maxlength" class="invalid-feedback">
               Please use a valid 10-digit phone number.
           </div>
       </div>
@@ -135,10 +136,17 @@
         <input
         type="text"
         class="form-control"
+        [ngClass] ="{'is-invalid':socialSecurity.errors && socialSecurity.touched}"
         name="socialSecurity"
         #socialSecurity="ngModel"
         [(ngModel)]="client.socialSecurity"
+        minlength="9"
+        maxlength="9"
+        pattern="/[0-9]+/"
         >
+        <div [hidden]="!socialSecurity.errors?.minlength && !socialSecurity.errors?.maxlength && !socialSecurity.errors?.pattern" class="invalid-feedback">
+          Must be exactly 9 numeric characters.
+        </div>
       </div>
 
       <div class="form-group">
