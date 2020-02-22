@@ -5,7 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Client } from 'src/app/models/client.model';
 import { AccountEvent } from 'src/app/models/account-event';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-client-details',
@@ -30,11 +29,11 @@ export class ClientDetailsComponent implements OnInit {
     this.clientService.getClient(this.id).subscribe(client => {
       this.client = client;
       this.accountEvents = client.accountEvents;
-      this.getBalance();
+      this.getBalance(client);
     });
   }
 
-  getBalance(){
+  getBalance(client: Client){
     this.client.balance = 0;
     for (let x = 0; x < this.client.accountEvents.length; x++) {
       if(this.client.accountEvents[x].type === 'Deposit') {
@@ -43,6 +42,7 @@ export class ClientDetailsComponent implements OnInit {
         this.client.balance = this.client.balance - this.client.accountEvents[x].amount;
       }
     }
+    this.clientService.updateClient(client);
   }
 
   removeEvent(event: AccountEvent, client: Client) {
