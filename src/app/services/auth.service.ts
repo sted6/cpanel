@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable(
@@ -12,6 +13,7 @@ import { map } from 'rxjs/operators';
 )
 export class AuthService {
   user: Observable<User>;
+  signedin$ = new BehaviorSubject(false);
 
   constructor(private afAuth: AngularFireAuth) {}
 
@@ -24,6 +26,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
+    this.signedin$.next(true);
     return new Promise((resolve, reject) => {
       this.afAuth.auth.signInWithEmailAndPassword(email, password)
         .then(userData => resolve(userData),
@@ -35,11 +38,16 @@ export class AuthService {
   }
 
   getAuth() {
-    return this.afAuth.authState.pipe(map(auth => auth));
+    return this.afAuth.authState.pipe(
+      tap((response) => {
+        console.log(response);
+      }),
+      map(auth => auth));
   }
 
   logout() {
     this.afAuth.auth.signOut();
+    this.signedin$.next(false);
   }
 
 }
