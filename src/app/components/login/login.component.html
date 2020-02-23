@@ -5,15 +5,12 @@
         <h1 class="text-center pb-4 pt-3">
           <span class="text-primary"><i class="fa fa-lock"></i> Client Panel</span><p>Login</p>
         </h1>
-        <form (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" [(ngModel)]="email" class="form-control" required>
-          </div>
-          <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" name="password" [(ngModel)]="password" class="form-control" required>
-          </div>
+        <form (ngSubmit)="onSubmit()" [formGroup]="authForm">
+          <app-input id="email" label="Email" type="email" [control]="authForm.get('email')">
+          </app-input>
+
+          <app-input id="password" label="Password" type="password" [control]="authForm.get('password')">
+          </app-input>
           <input type="submit" value="Login" class="btn btn-primary btn-block">
         </form>
       </div>

@@ -1,0 +1,17 @@
+<div class="form-group">
+    <label for="{{ id }}"class="col-12 col-form-label">{{ label }}</label>
+    <div class="col-12">
+        <input class="form-control" [id]="id" [type]="type" [formControl]="control">
+    </div>
+    <div *ngIf="showErrors()">
+      <small class="text-danger">
+        <p *ngIf="control.errors.required">Value is required.</p>
+
+        <p *ngIf="control.errors.minlength">Please enter {{ control.errors.minlength.requiredLength - control.errors.minlength.actualLength }} additional character(s).</p>
+
+        <p *ngIf="control.errors.maxlength">Your Username is too long. Please delete {{ control.errors.maxlength.actualLength - control.errors.maxlength.requiredLength }} character(s).</p>
+
+        <p *ngIf="control.errors.pattern">Please do not include special characters.</p>
+      </small>      
+    </div>
+  </div>

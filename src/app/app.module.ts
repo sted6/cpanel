@@ -26,12 +26,14 @@ import { BsDropdownModule } from 'ngx-bootstrap';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { FlashMessagesModule } from 'angular2-flash-messages';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './shared/shared.module';
 import { AddClientComponent } from './components/add-client/add-client.component';
 import { EditClientComponent } from './components/edit-client/edit-client.component';
 import { NewAccountEventComponent } from './components/new-account-event/new-account-event.component';
 import { PhonePipe } from './pipes/phone.pipe';
 import { SocialSecurityPipe } from './pipes/social-security.pipe';
+
 
 
 const firebaseConfig = {
@@ -60,11 +62,13 @@ const firebaseConfig = {
     EditClientComponent,
     NewAccountEventComponent,
     PhonePipe,
-    SocialSecurityPipe,
+    SocialSecurityPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule.enablePersistence(), // firestore
     AngularFireAuthModule, // auth

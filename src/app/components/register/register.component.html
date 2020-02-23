@@ -1,22 +1,36 @@
 <div class="row">
-    <div class="col-md-6 mx-auto">
-      <div class="card">
-        <div class="card-body">
-          <h1 class="text-center pb-4 pt-3">
-            <span class="text-primary"><i class="fa fa-lock"></i> Client Panel</span><p>Register</p>
-          </h1>
-          <form (ngSubmit)="onSubmit()">
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" [(ngModel)]="email" name="email" class="form-control" required>
+  <div class="col-md-6 mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="text-center pb-4 pt-3">
+          <span class="text-primary"><i class="fa fa-lock"></i> Client Panel</span>
+          <p>Register</p>
+        </h1>
+        <form (ngSubmit)="onSubmit()" [formGroup]="authForm">
+
+          <app-input id="email" label="Email" type="email" [control]="authForm.get('email')">
+          </app-input>
+
+          <app-input id="password" label="Password" type="password" [control]="authForm.get('password')">
+          </app-input>
+
+          <app-input id="passwordConfirm" label="Password Confirmation" type="password"
+            [control]="authForm.get('passwordConfirm')">
+          </app-input>
+          <ng-container>
+            <div *ngIf="authForm.get('password').touched && 
+            authForm.get('passwordConfirm').touched && 
+            authForm.errors">
+              <small class="text-danger">
+                <p *ngIf="authForm.errors.passwordsDontMatch === true">Password and Password Confirmation must match.
+                </p>
+              </small>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" [(ngModel)]="password" name="password" class="form-control" required>
-            </div>
-            <input type="submit" value="Register" class="btn btn-primary btn-block">
-          </form>
-        </div>
+          </ng-container>
+
+          <input type="submit" value="Register" class="btn btn-primary btn-block">
+        </form>
       </div>
     </div>
   </div>
+</div>
