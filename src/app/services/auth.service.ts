@@ -40,7 +40,11 @@ export class AuthService {
   getAuth() {
     return this.afAuth.authState.pipe(
       tap((response) => {
-        console.log(response);
+        if (response === null) {
+          this.signedin$.next(false);
+        } else {
+          this.signedin$.next(true);
+        }
       }),
       map(auth => auth));
   }
