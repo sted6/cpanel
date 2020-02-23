@@ -19,11 +19,11 @@
           <a *ngIf="isLoggedIn" class="nav-link" routerLink="/dashboard">Dashboard <span class="sr-only">(current)</span></a>
         </li>
       </ul>
-      <ng-container *ngIf="isLoggedIn === true && currentUser != undefined">
+      <div *ngIf="isLoggedIn === true && currentUser != undefined">
         <ul class="navbar-nav">
             <li class="navbar-brand pull-right">Welcome, {{currentUser}}</li>
         </ul>
-      </ng-container>
+      </div>
       <div *ngIf="!isLoggedIn" class="btn-group btn-group-sm">
         <div class="btn-group">
           <button type="button" class="btn btn-outline-primary" routerLink="/login">Login</button>

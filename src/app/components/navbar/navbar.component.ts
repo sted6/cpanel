@@ -10,7 +10,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class NavbarComponent implements OnInit {
   isCollapsed: boolean = true;
-  isLoggedIn: boolean;
+  isLoggedIn: boolean = false;
   currentUser: string;
   // showRegister: boolean;
 
